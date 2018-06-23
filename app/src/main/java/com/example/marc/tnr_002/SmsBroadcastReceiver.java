@@ -44,7 +44,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                 }
                 String smsBody = smsMessage.getMessageBody().toString();
                 String address = smsMessage.getOriginatingAddress();
-                Log.d(TAG, "SMS originating adress (phone#): " + address);
+                Log.d(TAG, "SMS originating address (___phone#): " + address);
                 Log.d(TAG, "smsBody...: " + smsBody);
                 if (isSaveCommandWithEmailValid(smsBody)) {
                     Log.d(TAG, "SMS message: 'Save' command with email is in valid format.");
@@ -123,7 +123,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                 extras.putString("send_email_to_this_address", smsBody);
                 intent2.putExtras(extras);
                 //------------------------------------------------------------
-                intent2.setComponent(new ComponentName("com.example.marc.abc001", "com.example.marc.abc001.MainActivity"));
+                intent2.setComponent(new ComponentName("com.example.marc.tnr_002", "com.example.marc.tnr_002.Main2Activity"));
                 Log.d(TAG, "Calling startActivity now");
                 try {
                     context.startActivity(intent2);
