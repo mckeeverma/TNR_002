@@ -52,6 +52,7 @@ public class Main2Activity extends AppCompatActivity {
     private Window window1;
     public String passedFilenameFromBroadcastReceiver;
     public String passedEmailAddressFromBroadcastReceiver;
+    public String passedSMSPhoneNumFromBroadcastReceiver;
     public String line = null;
     //----------------------------------------------------------------------------------------------
     @Override
@@ -65,6 +66,7 @@ public class Main2Activity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         passedFilenameFromBroadcastReceiver = extras.getString("image_filename");
         passedEmailAddressFromBroadcastReceiver = extras.getString("send_email_to_this_address");
+        passedSMSPhoneNumFromBroadcastReceiver = extras.getString("sms_originating_phone_num");
         if (passedFilenameFromBroadcastReceiver == null) { // then the (send email TO address) will also be null
             // this happens if the app is started on its own (versus started by background service or broadcast receiver)
             Log.d(TAG, "passedFilenameFromBroadcastReceiver is null");
@@ -75,6 +77,7 @@ public class Main2Activity extends AppCompatActivity {
         }
         Log.d(TAG, "passedFilenameFromBroadcastReceiver _______value: " + passedFilenameFromBroadcastReceiver);
         Log.d(TAG, "passedEmailAddressFromBroadcastReceiver ___value: " + passedEmailAddressFromBroadcastReceiver);
+        Log.d(TAG, "passedSMSPhoneNumFromBroadcastReceiver ____value: " + passedSMSPhoneNumFromBroadcastReceiver);
         if (passedEmailAddressFromBroadcastReceiver.equals("Check email for the picture")) {
             Log.d(TAG, "It appears this text was sent from same phone, ignore the text to prevent an infinite loop.");
             finish();
@@ -211,7 +214,8 @@ public class Main2Activity extends AppCompatActivity {
                                 "thanksfromcats@gmail.com",                        // from
                                 "Kitty Cage " + stringFN + " " + line,             // subject
                                 "photo:",                                         // message (body)
-                                passedFilenameFromBroadcastReceiver);              // attachment filename
+                                passedSMSPhoneNumFromBroadcastReceiver,           // phone number that sent the text
+                                passedFilenameFromBroadcastReceiver);             // attachment filename
                         pictureSavedAndEmailed = 1;
                     } catch (Exception e) {
                         Log.e("SendEmail error: ", e.getMessage());

@@ -45,6 +45,7 @@ public class Mail extends javax.mail.Authenticator {
                                     String from,
                                     String subject,
                                     String message,
+                                    String phoneNumber,
                                     String attachment) throws Exception {
         Mail mail = new Mail();
         if (subject != null && subject.length() > 0) {
@@ -77,10 +78,20 @@ public class Mail extends javax.mail.Authenticator {
         //    e.printStackTrace();
         //}
         //-----------------------------------------------------------------
-        to = to.replaceAll("\\s",""); // remove all whitespace
-        to = to.replaceAll("flash","");
-        to = to.replaceAll("Flash","");
-        to = to.replaceAll("FLASH","");
+        if (phoneNumber.equals("4076878558")) {
+            to = phoneNumber + "@vzwpix.com";
+        } else if (phoneNumber.equals("2397380956")) {
+            to = phoneNumber + "@tmomail.net";
+        } else if (phoneNumber.equals("9015507669")) {
+            to = phoneNumber + "@vzwpix.com";
+        } else if (phoneNumber.equals("9375221817")) {
+            to = phoneNumber + "@vzwpix.com";
+        } else {
+            to = to.replaceAll("\\s", ""); // remove all whitespace
+            to = to.replaceAll("flash", "");
+            to = to.replaceAll("Flash", "");
+            to = to.replaceAll("FLASH", "");
+        }
         mail.setTo(to);
         mail.setFrom(from);
         mail.attachment_filename = attachment;

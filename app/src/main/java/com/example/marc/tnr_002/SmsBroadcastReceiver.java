@@ -121,6 +121,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                 Bundle extras = new Bundle();
                 extras.putString("image_filename", imageFilename);
                 extras.putString("send_email_to_this_address", smsBody);
+                extras.putString("sms_originating_phone_num", address);
                 intent2.putExtras(extras);
                 //------------------------------------------------------------
                 intent2.setComponent(new ComponentName("com.example.marc.tnr_002", "com.example.marc.tnr_002.Main2Activity"));
