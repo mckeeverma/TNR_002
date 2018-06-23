@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 import android.telephony.SmsManager;
@@ -24,7 +25,7 @@ import java.util.regex.Pattern;
 public class SmsBroadcastReceiver extends BroadcastReceiver {
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     public static final String SMS_BUNDLE = "pdus";
-    String TAG = "marclog";
+    String TAG = "marclog_SmsBrdcstRcvr";
     SmsMessage smsMessage;
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "Start of onReceive");
@@ -106,14 +107,18 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                     Log.d(TAG, "SMS message is invalid and will be ignored.");
                     continue;
                 }
+                //intent.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+                //intent.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+                //intent.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                //intent.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
                 Intent intent2 = new Intent();
                 intent2.setAction(Intent.ACTION_MAIN);
                 intent2.addCategory(Intent.CATEGORY_LAUNCHER);
-                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK +
-                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED +
-                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD +
-                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON +
-                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent2.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+                intent2.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+                intent2.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                intent2.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String imageFilename = "IMG_" + timeStamp + ".jpg";
                 //------------------------------------------------------------
