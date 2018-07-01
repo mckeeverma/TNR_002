@@ -1,42 +1,37 @@
 package com.example.marc.tnr_002;
-        import android.Manifest;
-        import android.app.KeyguardManager;
-        import android.app.admin.DevicePolicyManager;
-        import android.content.Context;
-        import android.content.pm.PackageManager;
-        import android.graphics.PixelFormat;
-        import android.hardware.Camera;
-        import android.os.Build;
-        import android.os.Environment;
-        import android.os.Handler;
-        import android.support.v4.app.ActivityCompat;
-        import android.support.v4.content.ContextCompat;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.view.View;
-        import android.view.Window;
-        import android.view.WindowManager;
-        import android.widget.Button;
-        import android.widget.FrameLayout;
-        import android.widget.Toast;
-        import android.view.SurfaceHolder;
-        import android.view.SurfaceView;
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.PixelFormat;
+import android.hardware.Camera;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
-        import java.io.BufferedReader;
-        import java.io.File;
-        import java.io.FileInputStream;
-        import java.io.FileNotFoundException;
-        import java.io.FileOutputStream;
-        import java.io.FileReader;
-        import java.io.IOException;
-        import java.io.InputStreamReader;
-        import java.text.SimpleDateFormat;
-        import java.util.Date;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-        import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 @SuppressWarnings("deprecation")
-
 public class Main2Activity extends AppCompatActivity {
     private Camera mCamera;
     private CameraPreview mPreview;
@@ -72,8 +67,6 @@ public class Main2Activity extends AppCompatActivity {
             Log.d(TAG, "passedFilenameFromBroadcastReceiver is null");
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             passedFilenameFromBroadcastReceiver = "img_" + timeStamp + ".jpg";
-            //passedEmailAddressFromBroadcastReceiver = "thanksfromcats@gmail.com";
-            //passedEmailAddressFromBroadcastReceiver = "mckeeverma@aol.com";
         }
         Log.d(TAG, "passedFilenameFromBroadcastReceiver _______value: " + passedFilenameFromBroadcastReceiver);
         Log.d(TAG, "passedEmailAddressFromBroadcastReceiver ___value: " + passedEmailAddressFromBroadcastReceiver);
@@ -84,12 +77,6 @@ public class Main2Activity extends AppCompatActivity {
             android.os.Process.killProcess(android.os.Process.myPid());
             return;
         }
-        //if (passedEmailAddressFromBroadcastReceiver.equalsIgnoreCase("m")) {
-        //    passedEmailAddressFromBroadcastReceiver = "mckeeverma@aol.com";
-        //} else if (passedEmailAddress c vxzv cFromBroadcastReceiver.equalsIgnoreCase("t")) {
-        //    passedEmailAddressFromBroadcastReceiver = "leggup16@gmail.com";
-        //}
-        //captureButton.setText(passedFilenameFromBroadcastReceiver);
         if (passedEmailAddressFromBroadcastReceiver.contains("flash") ||
                 passedEmailAddressFromBroadcastReceiver.contains("Flash") ||
                 passedEmailAddressFromBroadcastReceiver.contains("FLASH")) {
@@ -97,7 +84,6 @@ public class Main2Activity extends AppCompatActivity {
         } else {
             Global_123.cameraFlash = 0;
         }
-        //captureButton.setText("a");
         captureButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -113,7 +99,6 @@ public class Main2Activity extends AppCompatActivity {
         captureButton.post(new Runnable() {
             @Override
             public void run() {
-                //Log.d(TAG, "captureButton.post is here_____");
                 firstTime++;
                 if (firstTime == 1) {
                     Log.d(TAG, "firstTime is true");
@@ -185,8 +170,7 @@ public class Main2Activity extends AppCompatActivity {
                 InputStreamReader inputStreamReader = new InputStreamReader(fis);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 StringBuilder stringBuilder = new StringBuilder();
-                while ( (line = bufferedReader.readLine()) != null )
-                {
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line + System.getProperty("line.separator"));
                 }
                 fis.close();
@@ -206,7 +190,6 @@ public class Main2Activity extends AppCompatActivity {
                     } else {
                         stringFN = "N";
                     }
-
                     try {
                         //Mail sender = new Mail("thanksfromcats@gmail.com", "thanksfromcats1");
                         Mail sender = new Mail();

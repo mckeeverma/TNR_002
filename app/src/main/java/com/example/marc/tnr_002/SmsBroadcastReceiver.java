@@ -5,18 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
-import android.telephony.SmsManager;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -75,7 +72,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                         continue;
                     }
                 } else if (smsBody.equalsIgnoreCase("n") ||
-                           smsBody.equalsIgnoreCase("f")) {
+                        smsBody.equalsIgnoreCase("f")) {
                     flashType = smsBody;
                     Log.d(TAG, "SMS message is valid (n or f) flash or no flash requested.");
                     try {
@@ -84,8 +81,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                         InputStreamReader inputStreamReader = new InputStreamReader(fis);
                         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                         StringBuilder stringBuilder = new StringBuilder();
-                        while ( (line = bufferedReader.readLine()) != null )
-                        {
+                        while ((line = bufferedReader.readLine()) != null) {
                             stringBuilder.append(line + System.getProperty("line.separator"));
                         }
                         fis.close();
@@ -107,10 +103,6 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                     Log.d(TAG, "SMS message is invalid and will be ignored.");
                     continue;
                 }
-                //intent.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-                //intent.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-                //intent.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                //intent.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
                 Intent intent2 = new Intent();
                 intent2.setAction(Intent.ACTION_MAIN);
                 intent2.addCategory(Intent.CATEGORY_LAUNCHER);
